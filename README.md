@@ -167,4 +167,11 @@ curl http://example.local/api    # backend (multitool)
 ```
 
 
-![alt text](image-14.png)# DevOps_Netology_Homework_11-kuber-4_Service_Ingress_Haproxy
+![alt text][def]
+
+
+
+
+![alt text](image-15.png)
+
+[def]: image-14.png
