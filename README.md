@@ -167,11 +167,46 @@ curl http://example.local/api    # backend (multitool)
 ```
 
 
-![alt text][def]
+![alt text](image-14.png)
 
 
 
 
+
+
+
+настроим Haproxy
+haproxy.cfg
+```
+
+defaults
+    mode http
+    timeout client 30s
+    timeout connect 5s
+    timeout server 30s
+
+frontend http-in
+    bind 192.168.31.117:30000
+    bind 127.0.0.1:80
+    mode http
+
+    use_backend multitool-backend if { path_beg /api/ }
+    default_backend nginx-backend
+
+backend nginx-backend
+    mode http
+    server minikube 192.168.49.2:80
+
+backend multitool-backend
+    mode http
+    server minikube 192.168.49.2:80
+
+listen stats
+    bind *:8080
+    mode http
+    stats enable
+    stats uri /stats
+    stats auth admin:admin
+
+```
 ![alt text](image-15.png)
-
-[def]: image-14.png
